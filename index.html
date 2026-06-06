@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lucie & Václav | 22. srpna 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Great+Vibes&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #fdf9ee;
+    --yellow-light: #faf3d0;
+    --yellow: #f5e882;
+    --yellow-mid: #e8d96a;
+    --blue-light: #c8dff5;
+    --blue: #7aaed4;
+    --blue-deep: #3a6fa8;
+    --blue-dark: #2c4f7a;
+    --ink: #1a2a3a;
+    --ink-soft: #3a4a5a;
+    --white: #ffffff;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap;
+    padding: 1rem 2rem;
+    background: rgba(253,249,238,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(122,174,212,0.2);
+  }
+  nav a {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.7rem; font-weight: 500; letter-spacing: 0.18em;
+    text-transform: uppercase; text-decoration: none;
+    color: var(--blue-dark); transition: color 0.2s;
+  }
+  nav a:hover { color: var(--blue); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100svh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+    padding: 7rem 2rem 4rem;
+    background: linear-gradient(160deg, #fdf9ee 0%, #faf3d0 40%, #eef5fc 100%);
+  }
+
+  /* Flower decorations – SVG-based watercolor-style */
+  .flower-tr {
+    position: absolute; top: -20px; right: -20px;
+    width: 340px; pointer-events: none; opacity: 0.9;
+    animation: fadeIn 1.8s ease both;
+  }
+  .flower-bl {
+    position: absolute; bottom: -10px; left: -20px;
+    width: 280px; pointer-events: none; opacity: 0.85;
+    animation: fadeIn 2s ease both;
+    transform: scaleX(-1) rotate(10deg);
+  }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+  .hero-inner {
+    text-align: center; position: relative; z-index: 2;
+    background: rgba(250,243,208,0.55);
+    border: 1px solid rgba(122,174,212,0.25);
+    border-radius: 4px;
+    padding: 3.5rem 4rem;
+    max-width: 560px;
+    backdrop-filter: blur(2px);
+    animation: fadeUp 1.2s ease both 0.3s;
+  }
+
+  .hero-names {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(4rem, 10vw, 7rem);
+    color: var(--blue-dark);
+    line-height: 1.1;
+    display: block;
+  }
+  .hero-amp {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; font-style: italic;
+    color: var(--blue); display: block; margin: -0.5rem 0;
+  }
+  .hero-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-style: italic; font-weight: 300;
+    color: var(--ink-soft); margin: 1.5rem 0 2rem;
+    line-height: 1.6;
+  }
+  .hero-tagline em { font-style: normal; font-weight: 400; color: var(--blue-deep); }
+
+  .hero-date {
+    display: flex; align-items: center; justify-content: center; gap: 1.2rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--blue-dark);
+  }
+  .hero-date .day { font-size: 2.8rem; font-weight: 300; letter-spacing: 0; color: var(--blue-dark); font-family: 'Cormorant Garamond', serif; }
+  .hero-date .sep { width: 40px; height: 1px; background: var(--blue); }
+
+  .hero-location {
+    margin-top: 1.2rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--blue-deep);
+  }
+
+  .scroll-hint {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+    color: var(--blue); font-size: 0.65rem; letter-spacing: 0.15em;
+    text-transform: uppercase; animation: bounce 2s infinite;
+  }
+  @keyframes bounce { 0%,100%{ transform: translateX(-50%) translateY(0);} 50%{ transform: translateX(-50%) translateY(6px);} }
+
+  /* ── SECTIONS ── */
+  section { padding: 5rem 2rem; max-width: 900px; margin: 0 auto; }
+  section.full { max-width: 100%; padding-left: 0; padding-right: 0; }
+
+  .section-label {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.65rem; font-weight: 500; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--blue);
+    margin-bottom: 0.6rem; display: block;
+  }
+  .section-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    color: var(--blue-dark);
+    margin-bottom: 2rem;
+  }
+
+  .divider {
+    display: flex; align-items: center; gap: 1rem;
+    margin: 0 auto 3rem; max-width: 200px;
+  }
+  .divider-line { flex: 1; height: 1px; background: var(--blue-light); }
+  .divider-heart { color: var(--blue); font-size: 0.8rem; }
+
+  /* ── COUNTDOWN ── */
+  #countdown-section {
+    background: linear-gradient(135deg, var(--blue-dark) 0%, #1e3a5f 100%);
+    padding: 4rem 2rem; text-align: center;
+  }
+  #countdown-section .section-label { color: var(--yellow); }
+  #countdown-section .section-title { color: var(--yellow-light); }
+  .countdown-grid {
+    display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;
+    margin-top: 2rem;
+  }
+  .countdown-item {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(122,174,212,0.3);
+    border-radius: 4px; padding: 1.5rem 2rem; min-width: 100px;
+    text-align: center;
+  }
+  .countdown-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem; font-weight: 300; color: var(--yellow);
+    line-height: 1; display: block;
+  }
+  .countdown-lbl {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--blue-light); margin-top: 0.3rem; display: block;
+  }
+
+  /* ── INFO GRID ── */
+  .info-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+    gap: 1.5rem; margin-top: 2rem;
+  }
+  .info-card {
+    background: var(--white);
+    border: 1px solid var(--blue-light);
+    border-radius: 4px; padding: 2rem;
+    position: relative; overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .info-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--yellow-mid), var(--blue-light));
+  }
+  .info-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(44,79,122,0.1); }
+  .info-icon { font-size: 1.8rem; margin-bottom: 0.8rem; display: block; }
+  .info-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; font-style: italic;
+    color: var(--blue-dark); margin-bottom: 0.6rem;
+  }
+  .info-card p {
+    font-size: 0.85rem; line-height: 1.7;
+    color: var(--ink-soft); font-weight: 300;
+  }
+  .info-card strong { color: var(--blue-dark); font-weight: 500; }
+
+  /* ── TIMELINE ── */
+  .timeline { position: relative; padding-left: 0; }
+  .timeline::before {
+    content: ''; position: absolute; left: 50%; top: 0; bottom: 0;
+    width: 1px; background: linear-gradient(to bottom, var(--yellow-mid), var(--blue-light), var(--blue));
+    transform: translateX(-50%);
+  }
+  .timeline-item {
+    display: grid; grid-template-columns: 1fr auto 1fr;
+    gap: 2rem; align-items: center; margin-bottom: 3rem;
+    animation: fadeUp 0.6s ease both;
+  }
+  .timeline-item:nth-child(odd) .tl-content { grid-column: 1; text-align: right; }
+  .timeline-item:nth-child(odd) .tl-empty { grid-column: 3; }
+  .timeline-item:nth-child(even) .tl-content { grid-column: 3; text-align: left; }
+  .timeline-item:nth-child(even) .tl-empty { grid-column: 1; }
+
+  .tl-dot {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: var(--yellow-light); border: 2px solid var(--blue-light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; flex-shrink: 0; grid-column: 2;
+    position: relative; z-index: 1;
+  }
+  .tl-time {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 600; color: var(--blue-dark);
+    display: block; margin-bottom: 0.2rem;
+  }
+  .tl-label {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.7rem; font-weight: 500; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--ink-soft);
+  }
+
+  /* ── MAP ── */
+  .map-wrapper {
+    border-radius: 4px; overflow: hidden;
+    border: 1px solid var(--blue-light);
+    box-shadow: 0 4px 20px rgba(44,79,122,0.1);
+    margin-top: 2rem;
+  }
+  .map-wrapper iframe { width: 100%; height: 380px; border: none; display: block; }
+  .map-address {
+    background: var(--white); padding: 1.2rem 1.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid var(--blue-light);
+    font-size: 0.82rem; color: var(--ink-soft);
+  }
+  .map-address a {
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--blue-deep);
+    text-decoration: none; border-bottom: 1px solid var(--blue-light);
+    padding-bottom: 1px;
+  }
+
+  /* ── DRESS CODE ── */
+  #dresscode { text-align: center; }
+  .color-palette {
+    display: flex; justify-content: center; gap: 1rem;
+    flex-wrap: wrap; margin: 2rem 0;
+  }
+  .color-swatch {
+    width: 80px; height: 80px; border-radius: 50%;
+    position: relative; cursor: default;
+    transition: transform 0.3s;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  .color-swatch:hover { transform: scale(1.1); }
+  .color-swatch span {
+    position: absolute; bottom: -1.5rem; left: 50%;
+    transform: translateX(-50%); white-space: nowrap;
+    font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .dresscode-note {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem; font-style: italic; color: var(--ink-soft);
+    max-width: 500px; margin: 3rem auto 0; line-height: 1.7;
+  }
+
+  /* ── RSVP ── */
+  #rsvp {
+    background: linear-gradient(135deg, #faf3d0 0%, #eef5fc 100%);
+    border-top: 1px solid var(--blue-light);
+    border-bottom: 1px solid var(--blue-light);
+    text-align: center;
+  }
+  .rsvp-form {
+    max-width: 520px; margin: 0 auto;
+    display: flex; flex-direction: column; gap: 1rem;
+  }
+  .rsvp-form input, .rsvp-form select, .rsvp-form textarea {
+    width: 100%; padding: 0.85rem 1.1rem;
+    border: 1px solid var(--blue-light); border-radius: 2px;
+    background: var(--white); font-family: 'Jost', sans-serif;
+    font-size: 0.85rem; color: var(--ink); outline: none;
+    transition: border-color 0.2s;
+  }
+  .rsvp-form input:focus, .rsvp-form select:focus, .rsvp-form textarea:focus {
+    border-color: var(--blue);
+  }
+  .rsvp-form textarea { resize: vertical; min-height: 90px; }
+  .btn-primary {
+    background: var(--blue-dark); color: var(--white);
+    border: none; padding: 1rem 2.5rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.2em;
+    text-transform: uppercase; cursor: pointer; border-radius: 2px;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .btn-primary:hover { background: var(--blue-deep); transform: translateY(-1px); }
+  .rsvp-deadline {
+    font-size: 0.75rem; color: var(--blue-deep);
+    letter-spacing: 0.1em; margin-top: 0.5rem;
+  }
+  .rsvp-success {
+    display: none; background: var(--blue-dark); color: var(--white);
+    padding: 1.5rem 2rem; border-radius: 4px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; font-style: italic;
+  }
+
+  /* ── QR / FOTKY ── */
+  .qr-section {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 1.5rem; text-align: center; margin-top: 2rem;
+  }
+  .qr-box {
+    background: var(--white); border: 1px solid var(--blue-light);
+    border-radius: 4px; padding: 2rem 3rem;
+    display: flex; flex-direction: column; align-items: center; gap: 1rem;
+  }
+  .qr-placeholder {
+    width: 160px; height: 160px;
+    background: var(--cream); border: 2px dashed var(--blue-light);
+    border-radius: 4px; display: flex; align-items: center; justify-content: center;
+    color: var(--blue); font-size: 3rem;
+  }
+  .qr-note {
+    font-size: 0.8rem; color: var(--ink-soft); line-height: 1.5;
+    max-width: 320px;
+  }
+  .hashtag {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-style: italic; color: var(--blue-dark);
+    margin-top: 0.5rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--blue-dark); color: var(--blue-light);
+    text-align: center; padding: 3rem 2rem;
+  }
+  footer .footer-names {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.5rem; color: var(--yellow-light); display: block;
+    margin-bottom: 0.5rem;
+  }
+  footer p { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.6; }
+  footer .contact {
+    margin-top: 1.5rem; font-size: 0.8rem; opacity: 0.8;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── FLOWERS SVG ── */
+  .floral-sep {
+    display: flex; justify-content: center; align-items: center;
+    gap: 1rem; margin: 0 auto 1rem; opacity: 0.6;
+  }
+  .floral-sep svg { width: 80px; }
+
+  .drive-link {
+    display: inline-block; margin-top: 0.3rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--blue-deep);
+    text-decoration: none; border-bottom: 1px solid var(--blue-light);
+    padding-bottom: 2px; transition: color 0.2s, border-color 0.2s;
+  }
+  .drive-link:hover { color: var(--blue-dark); border-color: var(--blue); }
+
+  /* ── MOBILE ── */
+  @media (max-width: 640px) {
+    nav { 
+      gap: 0.8rem 1.2rem; flex-wrap: wrap; padding: 0.7rem 1rem;
+      justify-content: center;
+    }
+    nav a { font-size: 0.58rem; letter-spacing: 0.12em; }
+
+    #hero { padding: 6rem 1rem 3rem; }
+    .flower-tr { width: 180px; top: -10px; right: -10px; }
+    .flower-bl { width: 150px; bottom: 40px; left: -10px; }
+
+    .hero-inner { 
+      padding: 2rem 1.2rem; max-width: 100%;
+      margin: 0 0.5rem;
+    }
+    .hero-names { font-size: 3.8rem; }
+    .hero-amp { font-size: 1.5rem; }
+    .hero-tagline { font-size: 1rem; margin: 1rem 0 1.5rem; }
+    .hero-date { 
+      flex-wrap: wrap; gap: 0.6rem; font-size: 0.65rem;
+    }
+    .hero-date .day { font-size: 2.2rem; }
+    .hero-date .sep { width: 25px; }
+    .hero-location { font-size: 0.65rem; }
+
+    #countdown-section { padding: 3rem 1rem; }
+    .countdown-grid { gap: 0.8rem; }
+    .countdown-item { padding: 1rem 1.2rem; min-width: 70px; }
+    .countdown-num { font-size: 2.5rem; }
+    .countdown-lbl { font-size: 0.6rem; }
+
+    section { padding: 3.5rem 1.2rem; }
+    .section-title { font-size: 2.2rem; margin-bottom: 1.5rem; }
+
+    .info-grid { grid-template-columns: 1fr; gap: 1rem; }
+    .info-card { padding: 1.5rem; }
+
+    /* Timeline mobile – vertical single column */
+    .timeline::before { left: 23px; top: 0; bottom: 0; }
+    .timeline-item { 
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      grid-template-rows: auto;
+      gap: 0 1rem;
+      margin-bottom: 2rem;
+    }
+    .tl-dot { 
+      grid-column: 1; grid-row: 1;
+      width: 44px; height: 44px; font-size: 1.1rem;
+    }
+    .tl-content,
+    .timeline-item:nth-child(odd) .tl-content,
+    .timeline-item:nth-child(even) .tl-content { 
+      grid-column: 2; grid-row: 1;
+      text-align: left;
+    }
+    .tl-empty { display: none !important; }
+    .tl-time { font-size: 1.2rem; }
+
+    .map-wrapper iframe { height: 260px; }
+    .map-address { 
+      flex-direction: column; gap: 0.8rem; 
+      text-align: center; padding: 1rem;
+    }
+
+    .color-palette { gap: 1.2rem; }
+    .color-swatch { width: 60px; height: 60px; }
+
+    .rsvp-form { gap: 0.8rem; }
+    .rsvp-form input, .rsvp-form select, .rsvp-form textarea {
+      padding: 0.75rem 0.9rem; font-size: 0.9rem;
+    }
+    .btn-primary { width: 100%; padding: 1rem; }
+
+    .qr-box { padding: 1.5rem; }
+    #qr-container canvas, #qr-container img { width: 140px !important; height: 140px !important; }
+
+    footer { padding: 2.5rem 1.2rem; }
+    footer .footer-names { font-size: 2rem; }
+  }
+
+  @media (max-width: 380px) {
+    .hero-names { font-size: 3rem; }
+    .countdown-item { min-width: 60px; padding: 0.8rem; }
+    .countdown-num { font-size: 2rem; }
+    nav a { font-size: 0.55rem; gap: 0.6rem; }
+  }
+
+
+  /* Vzkazy cards */
+  .vzkaz-card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(122,174,212,0.25);
+    border-radius: 4px; padding: 1.2rem;
+    animation: fadeUp 0.5s ease both;
+  }
+  .vzkaz-card .vz-author {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem; font-style: italic;
+    color: var(--yellow-light); margin-bottom: 0.4rem;
+  }
+  .vzkaz-card .vz-text {
+    font-size: 0.82rem; color: var(--blue-light); line-height: 1.6;
+  }
+  /* Playlist items */
+  .pl-item {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 0.8rem 1rem;
+    background: var(--white); border: 1px solid var(--blue-light);
+    border-radius: 4px; margin-bottom: 0.6rem;
+    animation: fadeUp 0.4s ease both;
+  }
+  .pl-item .pl-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; color: var(--blue-light); min-width: 28px;
+  }
+  .pl-item .pl-song { font-weight: 500; font-size: 0.88rem; color: var(--ink); }
+  .pl-item .pl-who { font-size: 0.72rem; color: var(--ink-soft); }
+  /* Weather box */
+  #weather-box { transition: all 0.3s ease; }
+
+  @media (max-width: 640px) {
+    #vzkazy-wall { grid-template-columns: 1fr; }
+    #checklist .info-grid, #checklist > div > div { grid-template-columns: 1fr; }
+  }
+
+
+  .info-icon-svg {
+    width: 44px; height: 44px;
+    background: linear-gradient(135deg, var(--yellow-light) 0%, var(--blue-light) 100%);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1rem;
+    padding: 10px;
+    border: 1px solid rgba(122,174,212,0.3);
+  }
+  .info-icon-svg svg {
+    width: 100%; height: 100%;
+  }
+  .info-card:hover .info-icon-svg {
+    background: linear-gradient(135deg, var(--blue-light) 0%, var(--yellow-light) 100%);
+    transition: background 0.4s ease;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#info">Informace</a>
+  <a href="#harmonogram">Harmonogram</a>
+  <a href="#misto">Místo</a>
+  <a href="#dresscode">Dress code</a>
+  <a href="#rsvp">RSVP</a>
+  <a href="#ubytovani">Ubytování</a>
+  <a href="#fotky">Fotky</a>
+  <a href="#playlist">Playlist</a>
+  <a href="#pocasi">Počasí</a>
+  <a href="#vzkazy">Vzkazy</a>
+  <a href="#checklist">Tipy</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <!-- Top-right flowers -->
+  <svg class="flower-tr" viewBox="0 0 340 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Stems -->
+    <path d="M220 380 Q210 280 250 180 Q270 130 300 80" stroke="#7aaed4" stroke-width="1.5" fill="none" opacity="0.5"/>
+    <path d="M260 380 Q240 300 270 200 Q290 150 310 60" stroke="#7aaed4" stroke-width="1.2" fill="none" opacity="0.4"/>
+    <path d="M180 380 Q200 300 230 220 Q260 160 290 90" stroke="#a8c8e8" stroke-width="1" fill="none" opacity="0.4"/>
+    <!-- Blue flowers cluster -->
+    <ellipse cx="295" cy="72" rx="18" ry="12" fill="#8bbde0" opacity="0.75" transform="rotate(-20 295 72)"/>
+    <ellipse cx="310" cy="60" rx="14" ry="9" fill="#6aaad6" opacity="0.8" transform="rotate(15 310 60)"/>
+    <ellipse cx="280" cy="58" rx="16" ry="10" fill="#9dcae8" opacity="0.7" transform="rotate(-35 280 58)"/>
+    <ellipse cx="300" cy="45" rx="12" ry="8" fill="#7ab8dc" opacity="0.75" transform="rotate(5 300 45)"/>
+    <ellipse cx="318" cy="78" rx="13" ry="8" fill="#8fc4e4" opacity="0.7" transform="rotate(30 318 78)"/>
+    <!-- Petal groups -->
+    <circle cx="295" cy="65" r="5" fill="#3a6fa8" opacity="0.6"/>
+    <circle cx="310" cy="55" r="4" fill="#3a6fa8" opacity="0.55"/>
+    <!-- Small flowers scattered -->
+    <circle cx="260" cy="110" r="8" fill="#8bbde0" opacity="0.6"/>
+    <circle cx="270" cy="95" r="6" fill="#6aaad6" opacity="0.55"/>
+    <circle cx="248" cy="100" r="7" fill="#9dcae8" opacity="0.5"/>
+    <circle cx="260" cy="80" r="5" fill="#4a80b8" opacity="0.5"/>
+    <!-- Tiny buds -->
+    <ellipse cx="240" cy="140" rx="6" ry="9" fill="#8bbde0" opacity="0.5" transform="rotate(-10 240 140)"/>
+    <ellipse cx="255" cy="150" rx="5" ry="8" fill="#6aaad6" opacity="0.45" transform="rotate(15 255 150)"/>
+    <ellipse cx="268" cy="165" rx="4" ry="7" fill="#9dcae8" opacity="0.4" transform="rotate(-5 268 165)"/>
+    <!-- Leaves -->
+    <path d="M250 170 Q270 155 285 170 Q270 180 250 170Z" fill="#7ab88c" opacity="0.35"/>
+    <path d="M230 210 Q255 195 265 215 Q248 222 230 210Z" fill="#6aa87a" opacity="0.3"/>
+    <path d="M218 250 Q240 238 248 258 Q232 264 218 250Z" fill="#7ab88c" opacity="0.28"/>
+    <!-- Round allium-style flowers -->
+    <g opacity="0.7">
+      <circle cx="320" cy="35" r="12" fill="none" stroke="#6aaad6" stroke-width="1"/>
+      <circle cx="315" cy="28" r="2.5" fill="#6aaad6"/>
+      <circle cx="324" cy="26" r="2" fill="#7ab8dc"/>
+      <circle cx="330" cy="32" r="2.5" fill="#6aaad6"/>
+      <circle cx="329" cy="41" r="2" fill="#7ab8dc"/>
+      <circle cx="322" cy="46" r="2.5" fill="#6aaad6"/>
+      <circle cx="313" cy="44" r="2" fill="#7ab8dc"/>
+      <circle cx="308" cy="37" r="2.5" fill="#6aaad6"/>
+      <circle cx="320" cy="35" r="3" fill="#3a6fa8"/>
+    </g>
+    <g opacity="0.55">
+      <circle cx="242" cy="188" r="9" fill="none" stroke="#8bbde0" stroke-width="0.8"/>
+      <circle cx="237" cy="182" r="2" fill="#8bbde0"/>
+      <circle cx="245" cy="180" r="1.8" fill="#6aaad6"/>
+      <circle cx="250" cy="186" r="2" fill="#8bbde0"/>
+      <circle cx="249" cy="194" r="1.8" fill="#6aaad6"/>
+      <circle cx="242" cy="197" r="2" fill="#8bbde0"/>
+      <circle cx="235" cy="193" r="1.8" fill="#6aaad6"/>
+      <circle cx="242" cy="188" r="2.5" fill="#3a6fa8"/>
+    </g>
+    <!-- Forget-me-not tiny flowers -->
+    <g opacity="0.6">
+      <circle cx="200" cy="300" r="4" fill="#b8d4ec"/>
+      <circle cx="195" cy="294" r="3" fill="#9dcae8"/>
+      <circle cx="208" cy="295" r="3.5" fill="#b8d4ec"/>
+      <circle cx="212" cy="305" r="3" fill="#9dcae8"/>
+      <circle cx="202" cy="310" r="3.5" fill="#b8d4ec"/>
+      <circle cx="192" cy="306" r="3" fill="#9dcae8"/>
+    </g>
+    <g opacity="0.5">
+      <circle cx="215" cy="270" r="3.5" fill="#b8d4ec"/>
+      <circle cx="210" cy="264" r="2.5" fill="#9dcae8"/>
+      <circle cx="222" cy="266" r="3" fill="#b8d4ec"/>
+      <circle cx="225" cy="275" r="2.5" fill="#9dcae8"/>
+      <circle cx="217" cy="278" r="3" fill="#b8d4ec"/>
+      <circle cx="207" cy="273" r="2.5" fill="#9dcae8"/>
+    </g>
+  </svg>
+
+  <!-- Bottom-left flowers (mirrored) -->
+  <svg class="flower-bl" viewBox="0 0 280 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M60 0 Q70 80 40 160 Q25 210 10 280" stroke="#7aaed4" stroke-width="1.5" fill="none" opacity="0.5"/>
+    <path d="M100 0 Q90 70 70 150 Q55 200 35 280" stroke="#7aaed4" stroke-width="1.2" fill="none" opacity="0.4"/>
+    <ellipse cx="55" cy="52" rx="18" ry="12" fill="#8bbde0" opacity="0.75" transform="rotate(20 55 52)"/>
+    <ellipse cx="40" cy="40" rx="14" ry="9" fill="#6aaad6" opacity="0.8" transform="rotate(-15 40 40)"/>
+    <ellipse cx="70" cy="38" rx="16" ry="10" fill="#9dcae8" opacity="0.7" transform="rotate(35 70 38)"/>
+    <ellipse cx="48" cy="25" rx="12" ry="8" fill="#7ab8dc" opacity="0.75"/>
+    <ellipse cx="32" cy="58" rx="13" ry="8" fill="#8fc4e4" opacity="0.7" transform="rotate(-30 32 58)"/>
+    <circle cx="55" cy="45" r="5" fill="#3a6fa8" opacity="0.6"/>
+    <g opacity="0.7">
+      <circle cx="28" cy="18" r="11" fill="none" stroke="#6aaad6" stroke-width="1"/>
+      <circle cx="23" cy="12" r="2.5" fill="#6aaad6"/>
+      <circle cx="31" cy="10" r="2" fill="#7ab8dc"/>
+      <circle cx="37" cy="16" r="2.5" fill="#6aaad6"/>
+      <circle cx="36" cy="24" r="2" fill="#7ab8dc"/>
+      <circle cx="29" cy="28" r="2.5" fill="#6aaad6"/>
+      <circle cx="21" cy="25" r="2" fill="#7ab8dc"/>
+      <circle cx="17" cy="19" r="2.5" fill="#6aaad6"/>
+      <circle cx="28" cy="18" r="3" fill="#3a6fa8"/>
+    </g>
+    <path d="M50 130 Q30 115 20 130 Q32 140 50 130Z" fill="#7ab88c" opacity="0.35"/>
+    <path d="M70 170 Q50 155 42 172 Q56 180 70 170Z" fill="#6aa87a" opacity="0.3"/>
+    <circle cx="80" cy="220" r="4" fill="#b8d4ec" opacity="0.6"/>
+    <circle cx="75" cy="214" r="3" fill="#9dcae8" opacity="0.55"/>
+    <circle cx="88" cy="216" r="3.5" fill="#b8d4ec" opacity="0.5"/>
+    <circle cx="90" cy="225" r="3" fill="#9dcae8" opacity="0.45"/>
+    <circle cx="82" cy="228" r="3.5" fill="#b8d4ec" opacity="0.5"/>
+    <circle cx="72" cy="224" r="3" fill="#9dcae8" opacity="0.45"/>
+  </svg>
+
+  <div class="hero-inner">
+    <span class="hero-names">Lucie</span>
+    <span class="hero-amp">a</span>
+    <span class="hero-names">Václav</span>
+    <p class="hero-tagline">
+      Vedeni <em>láskou</em> a spojeni <em>srdcem,</em><br>
+      vstupujeme do našeho <em>navždy.</em>
+    </p>
+    <div class="hero-date">
+      <span class="sep"></span>
+      <span>Sobota</span>
+      <span class="day">22</span>
+      <span>srpna 2026</span>
+      <span>12:00</span>
+      <span class="sep"></span>
+    </div>
+    <p class="hero-location">Stodola Pod Lípou · Přešín 9, Čížkov</p>
+  </div>
+
+  <div class="scroll-hint">
+    <span>↓</span>
+    <span style="font-size:0.6rem;letter-spacing:0.2em;">scroll</span>
+  </div>
+</section>
+
+<!-- COUNTDOWN -->
+<div id="countdown-section">
+  <span class="section-label">Do svatby zbývá</span>
+  <div class="section-title" style="font-family:'Great Vibes',cursive;color:var(--yellow-light);font-size:2.5rem;">ještě chvíli</div>
+  <div class="countdown-grid">
+    <div class="countdown-item"><span class="countdown-num" id="cd-days">--</span><span class="countdown-lbl">dní</span></div>
+    <div class="countdown-item"><span class="countdown-num" id="cd-hours">--</span><span class="countdown-lbl">hodin</span></div>
+    <div class="countdown-item"><span class="countdown-num" id="cd-mins">--</span><span class="countdown-lbl">minut</span></div>
+    <div class="countdown-item"><span class="countdown-num" id="cd-secs">--</span><span class="countdown-lbl">sekund</span></div>
+  </div>
+</div>
+
+<!-- INFO -->
+<section id="info">
+  <span class="section-label">Vše, co potřebujete vědět</span>
+  <div class="section-title">Informace</div>
+  <div class="divider"><div class="divider-line"></div><div class="divider-heart">♡</div><div class="divider-line"></div></div>
+
+  <div class="info-grid">
+    <div class="info-card">
+      <div class="info-icon-svg"><svg viewBox="0 0 40 40" fill="none"><path d="M12 8v8a6 6 0 0 0 6 6v8" stroke="#7aaed4" stroke-width="1.5" stroke-linecap="round"/><path d="M20 8v24" stroke="#3a6fa8" stroke-width="1.5" stroke-linecap="round"/><path d="M28 8v5c0 2.8-2.2 5-5 5v11" stroke="#7aaed4" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      <h3>Občerstvení</h3>
+      <p>Svatební oběd pořádáme <strong>v rodinném kruhu</strong>. Po celý den však bude připraveno bohaté <strong>venkovní občerstvení</strong> pro všechny hosty.</p>
+    </div>
+    <div class="info-card">
+      <div class="info-icon-svg"><svg viewBox="0 0 40 40" fill="none"><rect x="8" y="6" width="24" height="28" rx="3" stroke="#7aaed4" stroke-width="1.5"/><path d="M15 13h7a4 4 0 0 1 0 8h-7V13Z" stroke="#3a6fa8" stroke-width="1.5" stroke-linejoin="round"/><path d="M15 21v8" stroke="#7aaed4" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      <h3>Parkování</h3>
+      <p>Parkování je <strong>zajištěno v areálu Stodoly Pod Lípou</strong>. Nemusíte si dělat starosti.</p>
+    </div>
+    <div class="info-card">
+      <div class="info-icon-svg"><svg viewBox="0 0 40 40" fill="none"><path d="M6 18L20 6l14 12" stroke="#7aaed4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 15v17h20V15" stroke="#3a6fa8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="16" y="24" width="8" height="8" rx="1" stroke="#7aaed4" stroke-width="1.3"/></svg></div>
+      <h3>Ubytování</h3>
+      <p>Ubytování je možné zajistit přímo na místě. Prosíme o informaci <strong>do 31. 5. 2026</strong>. Fantazii se meze nekladou – stan, auto či hamaka vítány! 🙂</p>
+    </div>
+    <div class="info-card">
+      <div class="info-icon-svg"><svg viewBox="0 0 40 40" fill="none"><rect x="7" y="16" width="26" height="18" rx="2" stroke="#7aaed4" stroke-width="1.5"/><path d="M7 22h26" stroke="#3a6fa8" stroke-width="1.3" stroke-linecap="round"/><path d="M20 16v18" stroke="#3a6fa8" stroke-width="1.3" stroke-linecap="round"/><path d="M20 16c0 0-4-8 0-8s0 8 0 8" stroke="#7aaed4" stroke-width="1.3" stroke-linecap="round"/><path d="M20 16c0 0 4-8 0-8" stroke="#c8dff5" stroke-width="1.3" stroke-linecap="round"/><rect x="7" y="11" width="26" height="5" rx="2" stroke="#7aaed4" stroke-width="1.5"/></svg></div>
+      <h3>Dary</h3>
+      <p>Nejvíc si přejeme <strong>mít vás u toho</strong>. Pokud nás ale chcete potěšit i darem, uvítáme příspěvek do našeho společného začátku.</p>
+    </div>
+    <div class="info-card">
+      <div class="info-icon-svg"><svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="13" stroke="#7aaed4" stroke-width="1.5"/><path d="M13 20l5 5 9-9" stroke="#3a6fa8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <h3>Potvrzení účasti</h3>
+      <p>Svou účast nám, prosím, potvrďte <strong>do 30. 6. 2026</strong>. Využijte RSVP formulář níže nebo kontaktujte svědkyni.</p>
+    </div>
+    <div class="info-card">
+      <div class="info-icon-svg"><svg viewBox="0 0 40 40" fill="none"><path d="M13 8h4l2 6-2.5 1.5a16 16 0 0 0 8 8L26 21l6 2v4c0 2-1.5 3-3.5 2.5C14 27 10 15 10 11c-.5-2 1-3 3-3Z" stroke="#7aaed4" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+      <h3>V den svatby</h3>
+      <p>Cokoli budete potřebovat, obraťte se na svědkyni:<br><strong>+420 733 280 287</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- HARMONOGRAM -->
+<section id="harmonogram" style="background:linear-gradient(180deg, var(--cream) 0%, var(--yellow-light) 100%); max-width:100%; padding:5rem 2rem;">
+  <div style="max-width:700px;margin:0 auto;">
+    <span class="section-label" style="display:block;text-align:center;">Jak bude den vypadat</span>
+    <div class="section-title" style="text-align:center;">Harmonogram</div>
+    <div class="divider"><div class="divider-line"></div><div class="divider-heart">♡</div><div class="divider-line"></div></div>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="tl-content">
+          <span class="tl-time">11:00 – 11:30</span>
+          <span class="tl-label">Příjezd hostů</span>
+        </div>
+        <div class="tl-dot">🚗</div>
+        <div class="tl-empty"></div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-empty"></div>
+        <div class="tl-dot">💍</div>
+        <div class="tl-content">
+          <span class="tl-time">12:00</span>
+          <span class="tl-label" style="font-family:'Great Vibes',cursive;font-size:1.5rem;letter-spacing:0;text-transform:none;color:var(--blue-dark);">Ano!</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-content">
+          <span class="tl-time">13:00</span>
+          <span class="tl-label">Oběd / Raut</span>
+        </div>
+        <div class="tl-dot">🍽️</div>
+        <div class="tl-empty"></div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-empty"></div>
+        <div class="tl-dot">📸</div>
+        <div class="tl-content">
+          <span class="tl-time">14:00</span>
+          <span class="tl-label">Zábava</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-content">
+          <span class="tl-time">20:00</span>
+          <span class="tl-label">Partyyy 🎉</span>
+        </div>
+        <div class="tl-dot">🥂</div>
+        <div class="tl-empty"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MÍSTO -->
+<section id="misto">
+  <span class="section-label">Kde nás najdete</span>
+  <div class="section-title">Místo</div>
+  <div class="divider"><div class="divider-line"></div><div class="divider-heart">♡</div><div class="divider-line"></div></div>
+
+  <div class="map-wrapper">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2590.5!2d13.6785!3d49.5632!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zUMWZZcWhw61uIDksIDMzNSA2MyDEjsOtemtvdg!5e0!3m2!1scs!2scz!4v1"
+      allowfullscreen loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+    <div class="map-address">
+      <div>
+        <strong style="font-size:0.9rem;color:var(--blue-dark);">Stodola Pod Lípou</strong><br>
+        <span>Přešín 9, 335 63 Čížkov</span>
+      </div>
+      <a href="https://maps.google.com/?q=Přešín+9,+335+63+Čížkov" target="_blank">Otevřít v Mapách →</a>
+    </div>
+  </div>
+</section>
+
+<!-- DRESS CODE -->
+<section id="dresscode" style="background:var(--yellow-light);max-width:100%;padding:5rem 2rem;">
+  <div style="max-width:700px;margin:0 auto;text-align:center;">
+    <span class="section-label">Co si vzít na sebe</span>
+    <div class="section-title">Dress code</div>
+    <div class="divider"><div class="divider-line"></div><div class="divider-heart">♡</div><div class="divider-line"></div></div>
+
+    <div class="color-palette">
+      <div>
+        <div class="color-swatch" style="background:#faf3d0;border:1px solid #e8d96a;"></div>
+        <span style="display:block;margin-top:2rem;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-soft);">Butter Yellow</span>
+      </div>
+      <div>
+        <div class="color-swatch" style="background:#f5e882;border:1px solid #e8d96a;"></div>
+        <span style="display:block;margin-top:2rem;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-soft);">Yellow</span>
+      </div>
+      <div>
+        <div class="color-swatch" style="background:#c8dff5;"></div>
+        <span style="display:block;margin-top:2rem;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-soft);">Baby Blue</span>
+      </div>
+      <div>
+        <div class="color-swatch" style="background:#7aaed4;"></div>
+        <span style="display:block;margin-top:2rem;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-soft);">Blue</span>
+      </div>
+    </div>
+
+    <p class="dresscode-note" style="margin-top:4rem;">
+      Outfit v tónech naší svatby uvítáme,<br>ale nejdůležitější je, že přijdete. 🤍
+    </p>
+  </div>
+</section>
+
+
+<!-- UBYTOVÁNÍ FORMULÁŘ -->
+<section id="ubytovani" style="background:linear-gradient(135deg,var(--cream) 0%,var(--blue-light) 100%);max-width:100%;padding:5rem 2rem;">
+  <div style="max-width:620px;margin:0 auto;text-align:center;">
+    <span class="section-label">Přespání přímo na místě</span>
+    <div class="section-title">Ubytování</div>
+    <div class="divider"><div class="divider-line"></div><div class="divider-heart">♡</div><div class="divider-line"></div></div>
+
+    <div style="background:var(--white);border:1px solid var(--blue-light);border-radius:4px;padding:2rem;margin-bottom:2rem;text-align:left;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--yellow-mid),var(--blue-light));"></div>
+      <p style="font-size:0.88rem;line-height:1.8;color:var(--ink-soft);">
+        Ubytování je zajištěno přímo vedle Stodoly Pod Lípou – ve špejcháři a v chatě. 
+        <strong style="color:var(--blue-dark);">Míst je omezený počet</strong>, prosíme o včasné přihlášení.
+      </p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.5rem;">
+        <div style="background:var(--yellow-light);border-radius:4px;padding:1rem;text-align:center;">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--blue-dark);font-weight:600;">650 Kč</div>
+          <div style="font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-soft);margin-top:0.2rem;">za osobu / noc</div>
+        </div>
+        <div style="background:var(--blue-light);border-radius:4px;padding:1rem;text-align:center;">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--blue-dark);font-weight:600;">+ 150 Kč</div>
+          <div style="font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-soft);margin-top:0.2rem;">snídaně v ceně pro všechny</div>
+        </div>
+      </div>
+      <p style="font-size:0.75rem;color:var(--blue-deep);margin-top:1rem;font-style:italic;text-align:center;">
+        ⚠️ Kapacita je omezena – přihlaste se prosím do <strong>31. 5. 2026</strong>.
+      </p>
+    </div>
+
+    <div style="background:var(--white);border:1px solid var(--blue-light);border-radius:4px;padding:2.5rem;text-align:center;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--yellow-mid),var(--blue-light));"></div>
+      <div style="font-family:'Great Vibes',cursive;font-size:2rem;color:var(--blue-dark);margin-bottom:1rem;">Přihlásit se</div>
+      <p style="font-size:0.85rem;color:var(--ink-soft);line-height:1.7;margin-bottom:2rem;">
+        Míst je omezený počet – přihlaste se co nejdříve.<br>
+        Po odeslání vás svědkyně Baru kontaktuje s potvrzením.
+      </p>
+      <a href="https://forms.gle/N8i9d3jkuGrThyQU7" target="_blank" class="btn-primary" style="display:inline-block;text-decoration:none;padding:1rem 3rem;">
+        Přihlásit se k ubytování →
+      </a>
+      <p style="font-size:0.7rem;color:var(--blue);margin-top:1.5rem;letter-spacing:0.1em;">DO 31. 5. 2026</p>
+    </div>
+  </div>
+</section>
+
+<!-- RSVP -->
+<section id="rsvp">
+  <span class="section-label" style="display:block;text-align:center;">Dejte nám vědět</span>
+  <div class="section-title" style="text-align:center;">Potvrzení účasti</div>
+  <div class="divider"><div class="divider-line"></div><div class="divider-heart">♡</div><div class="divider-line"></div></div>
+  <p class="rsvp-deadline">Prosíme o potvrzení do <strong>30. 6. 2026</strong></p>
+  <br>
+
+  <div style="max-width:520px;margin:0 auto;">
+    <div style="background:var(--white);border:1px solid var(--blue-light);border-radius:4px;padding:2.5rem;text-align:center;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--yellow-mid),var(--blue-light));"></div>
+      <div style="font-family:'Great Vibes',cursive;font-size:2rem;color:var(--blue-dark);margin-bottom:1rem;">Přijdete?</div>
+      <p style="font-size:0.85rem;color:var(--ink-soft);line-height:1.7;margin-bottom:2rem;">
+        Klikněte na tlačítko níže a vyplňte krátký formulář.<br>Trvá to jen minutu. 🤍
+      </p>
+      <a href="https://forms.gle/C9EDuAuiDCYB7uzk6" target="_blank" class="btn-primary" style="display:inline-block;text-decoration:none;padding:1rem 3rem;">
+        Potvrdit účast →
+      </a>
+      <p style="font-size:0.7rem;color:var(--blue);margin-top:1.5rem;letter-spacing:0.1em;">DO 30. 6. 2026</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOTKY / QR -->
+<section id="fotky" style="text-align:center;">
+  <span class="section-label">Sdílejte vzpomínky</span>
+  <div class="section-title">Vaše fotky</div>
+  <div class="divider"><div class="divider-line"></div><div class="divider-heart">♡</div><div class="divider-line"></div></div>
+
+  <div class="qr-section">
+    <p style="font-size:0.9rem;color:var(--ink-soft);max-width:480px;line-height:1.7;">
+      Nasdílejte své fotky ze svatebního dne do společného alba. Rádi uvidíme den naší svatby i vašima očima. 📷
+    </p>
+
+    <div class="qr-box">
+      <div class="qr-placeholder" id="qr-container"></div>
+      <p class="qr-note">
+        <strong>Odkaz na sdílené album</strong> bude doplněn před svatbou.<br>
+        QR kód najdete také na místě.
+      </p>
+    </div>
+
+    <div>
+      <p style="font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--blue-deep);margin-bottom:0.3rem;">Označte nás na sociálních sítích</p>
+      <div class="hashtag">#kaasovic2026</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+
+<!-- PLAYLIST -->
+<section id="playlist" style="background:linear-gradient(135deg,var(--yellow-light) 0%,var(--cream) 100%);max-width:100%;padding:5rem 2rem;">
+  <div style="max-width:680px;margin:0 auto;text-align:center;">
+    <span class="section-label">Ať se hraje!</span>
+    <div class="section-title">Navrhni píseň</div>
+    <div class="divider"><div class="divider-line"></div><div class="divider-heart">♡</div><div class="divider-line"></div></div>
+    <p style="font-size:0.88rem;color:var(--ink-soft);line-height:1.7;margin-bottom:2rem;">
+      Máš píseň, bez které se dobrá párty neobejde? Pošli nám ji a DJ ji zařadí do setlistu! 🎶
+    </p>
+    <div style="max-width:480px;margin:0 auto;background:var(--white);border:1px solid var(--blue-light);border-radius:4px;padding:2.5rem;text-align:center;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--yellow-mid),var(--blue-light));"></div>
+      <div style="font-family:'Great Vibes',cursive;font-size:2rem;color:var(--blue-dark);margin-bottom:1rem;">Navrhnout píseň</div>
+      <p style="font-size:0.85rem;color:var(--ink-soft);line-height:1.7;margin-bottom:2rem;">
+        Máš tip na píseň bez které se dobrá párty neobejde?<br>Pošli ji DJ! 🎶
+      </p>
+      <a href="https://forms.gle/Tz7mmmBveSXWj8P87" target="_blank" class="btn-primary" style="display:inline-block;text-decoration:none;padding:1rem 3rem;background:var(--blue-dark);color:var(--white);">
+        Navrhnout píseň →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- POČASÍ -->
+<section id="pocasi" style="text-align:center;">
+  <span class="section-label">Příroda nám přeje</span>
+  <div class="section-title">Počasí</div>
+  <div class="divider"><div class="divider-line"></div><div class="divider-heart">♡</div><div class="divider-line"></div></div>
+  <div style="max-width:600px;margin:0 auto;">
+    <div id="weather-box" style="background:var(--white);border:1px solid var(--blue-light);border-radius:4px;padding:2.5rem;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--yellow-mid),var(--blue-light));"></div>
+      <div style="font-size:4rem;margin-bottom:0.5rem;" id="weather-icon">🌤️</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--blue-dark);margin-bottom:0.3rem;" id="weather-temp">22°C</div>
+      <div style="font-size:0.8rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--blue);margin-bottom:1rem;" id="weather-desc">Slunečno s lehkým větříkem</div>
+      <p style="font-size:0.78rem;color:var(--ink-soft);line-height:1.6;" id="weather-note">
+        Předpověď počasí pro <strong>Čížkov, 22. 8. 2026</strong> bude k dispozici přibližně 7 dní před svatbou. Prozatím věříme, že slunce svítí pro nás! ☀️
+      </p>
+    </div>
+    <p style="font-size:0.72rem;color:var(--ink-soft);margin-top:1rem;font-style:italic;">
+      Data budou automaticky aktualizována z Open-Meteo předpovědi.
+    </p>
+  </div>
+</section>
+
+<!-- VZKAZY -->
+<section id="vzkazy" style="background:linear-gradient(135deg,var(--blue-dark) 0%,#1e3a5f 100%);max-width:100%;padding:5rem 2rem;">
+  <div style="max-width:700px;margin:0 auto;text-align:center;">
+    <span class="section-label" style="color:var(--yellow);">Řekněte nám to</span>
+    <div class="section-title" style="color:var(--yellow-light);">Vzkazy novomanželům</div>
+    <div class="divider"><div class="divider-line" style="background:rgba(122,174,212,0.4);"></div><div class="divider-heart" style="color:var(--yellow);">♡</div><div class="divider-line" style="background:rgba(122,174,212,0.4);"></div></div>
+    <p style="font-size:0.88rem;color:var(--blue-light);line-height:1.7;margin-bottom:2rem;">
+      Přejte Lucii a Václavovi. Váš vzkaz se objeví na zdi přání. 💌
+    </p>
+    <form class="rsvp-form" style="max-width:480px;margin:0 auto 2rem;" onsubmit="submitVzkaz(event)">
+      <input type="text" id="vz-name" placeholder="Vaše jméno *" required style="background:rgba(255,255,255,0.1);border-color:rgba(122,174,212,0.4);color:white;">
+      <textarea id="vz-msg" placeholder="Váš vzkaz novomanželům 💌 *" required rows="3" style="background:rgba(255,255,255,0.1);border-color:rgba(122,174,212,0.4);color:white;"></textarea>
+      <button type="submit" class="btn-primary" style="background:var(--yellow-mid);color:var(--blue-dark);">Odeslat vzkaz 💌</button>
+    </form>
+    <div id="vzkazy-wall" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;text-align:left;"></div>
+  </div>
+</section>
+
+<!-- CHECKLIST PRO HOSTY -->
+<section id="checklist" style="text-align:center;">
+  <span class="section-label">Malé tipy</span>
+  <div class="section-title">Co si vzít s sebou</div>
+  <div class="divider"><div class="divider-line"></div><div class="divider-heart">♡</div><div class="divider-line"></div></div>
+  <div style="max-width:680px;margin:0 auto;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;text-align:left;">
+      <div class="info-card"><div class="info-icon-svg"><svg viewBox="0 0 40 40" fill="none"><path d="M5 28c0 0 4-2 8-2l8-10 6 2 5-2 3 4-2 2s-2 6-8 6H5Z" stroke="#7aaed4" stroke-width="1.5" stroke-linejoin="round"/><path d="M13 26l2-10" stroke="#c8dff5" stroke-width="1.2" stroke-linecap="round"/><path d="M19 28l-1-4 6-2" stroke="#c8dff5" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Pohodlné boty</h3><p>Část programu bude probíhat venku na trávě. Jehlové podpatky možná nechte doma. 😄</p></div>
+      <div class="info-card"><div class="info-icon-svg"><svg viewBox="0 0 40 40" fill="none"><path d="M6 18h28" stroke="#7aaed4" stroke-width="1.5" stroke-linecap="round"/><circle cx="13" cy="21" r="6" stroke="#3a6fa8" stroke-width="1.5"/><circle cx="27" cy="21" r="6" stroke="#3a6fa8" stroke-width="1.5"/><path d="M19 21h2" stroke="#7aaed4" stroke-width="1.5" stroke-linecap="round"/></svg></div><h3>Sluneční brýle</h3><p>Srpnové slunce umí být silné – hlavně při obřadu venku pod lípou.</p></div>
+      <div class="info-card"><div class="info-icon-svg"><svg viewBox="0 0 40 40" fill="none"><rect x="13" y="10" width="14" height="22" rx="3" stroke="#7aaed4" stroke-width="1.5"/><path d="M16 10V7h8v3" stroke="#3a6fa8" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M17 18c1-1 2-1 3 0s2 1 3 0" stroke="#c8dff5" stroke-width="1.2" stroke-linecap="round"/><path d="M17 23c1-1 2-1 3 0s2 1 3 0" stroke="#c8dff5" stroke-width="1.2" stroke-linecap="round"/></svg></div><h3>Repelent</h3><p>Večerní zábava bude venku i uvnitř – repelent se může hodit.</p></div>
+      <div class="info-card"><div class="info-icon-svg"><svg viewBox="0 0 40 40" fill="none"><path d="M15 6l-8 6v6h5v14h16V18h5v-6l-8-6" stroke="#7aaed4" stroke-width="1.5" stroke-linejoin="round"/><path d="M15 6c0 0 2 4 5 4s5-4 5-4" stroke="#3a6fa8" stroke-width="1.3" stroke-linejoin="round"/></svg></div><h3>Lehká vrstva navíc</h3><p>Srpnové večery bývají příjemně chladné. Malá mikina nebo sako se hodí.</p></div>
+      <div class="info-card"><div class="info-icon-svg"><svg viewBox="0 0 40 40" fill="none"><rect x="12" y="5" width="16" height="30" rx="3" stroke="#7aaed4" stroke-width="1.5"/><circle cx="20" cy="31" r="1.5" fill="#3a6fa8"/><path d="M16 9h8" stroke="#c8dff5" stroke-width="1.3" stroke-linecap="round"/></svg></div><h3>Nabitý telefon</h3><p>Budete chtít fotit! A QR kód na album naskenovat. Powerbank vítána.</p></div>
+      <div class="info-card"><div class="info-icon-svg"><svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="9" r="3" stroke="#7aaed4" stroke-width="1.5"/><path d="M20 12v10" stroke="#3a6fa8" stroke-width="1.5" stroke-linecap="round"/><path d="M20 16l-6 5" stroke="#7aaed4" stroke-width="1.5" stroke-linecap="round"/><path d="M20 16l6 5" stroke="#7aaed4" stroke-width="1.5" stroke-linecap="round"/><path d="M20 22l-4 9" stroke="#3a6fa8" stroke-width="1.5" stroke-linecap="round"/><path d="M20 22l4 9" stroke="#3a6fa8" stroke-width="1.5" stroke-linecap="round"/></svg></div><h3>Taneční nálada</h3><p>DJ bude hrát do noci. Přijďte s chuť se bavit – to je to nejdůležitější!</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-names">Lucie & Václav</span>
+  <p>22. srpna 2026 · Stodola Pod Lípou · Přešín 9, Čížkov</p>
+  <div class="contact">
+    V den svatby: <strong style="color:var(--yellow-light);">+420 733 280 287</strong>
+  </div>
+</footer>
+
+<script>
+// Countdown
+function updateCountdown() {
+  const wedding = new Date('2026-08-22T12:00:00');
+  const now = new Date();
+  const diff = wedding - now;
+  if (diff <= 0) {
+    document.getElementById('cd-days').textContent = '0';
+    document.getElementById('cd-hours').textContent = '0';
+    document.getElementById('cd-mins').textContent = '0';
+    document.getElementById('cd-secs').textContent = '0';
+    return;
+  }
+  const days = Math.floor(diff / 86400000);
+  const hours = Math.floor((diff % 86400000) / 3600000);
+  const mins = Math.floor((diff % 3600000) / 60000);
+  const secs = Math.floor((diff % 60000) / 1000);
+  document.getElementById('cd-days').textContent = days;
+  document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
+  document.getElementById('cd-mins').textContent = String(mins).padStart(2,'0');
+  document.getElementById('cd-secs').textContent = String(secs).padStart(2,'0');
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// RSVP
+function submitRSVP(e) {
+  e.preventDefault();
+  document.getElementById('rsvpForm').style.display = 'none';
+  document.getElementById('rsvpSuccess').style.display = 'block';
+}
+
+
+
+// ── UBYTOVÁNÍ ──
+function submitUbytovani(e) {
+  e.preventDefault();
+  const name = document.getElementById('ub-name').value;
+  const persons = document.getElementById('ub-persons').value;
+  const snidane = document.getElementById('ub-snidane').value;
+  const contact = document.getElementById('ub-contact').value;
+  const note = document.getElementById('ub-note').value;
+  const total = parseInt(persons) * 650 + (snidane === 'ano' ? parseInt(persons) * 150 : 0);
+  document.getElementById('ubytovaniForm').style.display = 'none';
+  const success = document.getElementById('ubytovani-success');
+  success.style.display = 'block';
+  success.innerHTML = `Díky, <em>${name}</em>! Zarezervováno pro ${persons} ${parseInt(persons) === 1 ? 'osobu' : 'osoby'}${snidane === 'ano' ? ' se snídaní' : ''}. Celkem: <strong>${total} Kč</strong>. Svědkyně Baru vás brzy kontaktuje na ${contact}. 🤍`;
+}
+
+// ── PLAYLIST ──
+const songs = [];
+function submitPlaylist(e) {
+  e.preventDefault();
+  const name = document.getElementById('pl-name').value || 'Anonym';
+  const song = document.getElementById('pl-song').value;
+  const reason = document.getElementById('pl-reason').value;
+  songs.push({ name, song, reason });
+  renderPlaylist();
+  e.target.reset();
+  document.getElementById('playlist-success').style.display = 'block';
+  setTimeout(() => document.getElementById('playlist-success').style.display = 'none', 3000);
+}
+function renderPlaylist() {
+  const list = document.getElementById('playlist-list');
+  if (songs.length === 0) { list.innerHTML = ''; return; }
+  list.innerHTML = '<p style="font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--blue);margin-bottom:1rem;">Navržené písně</p>' +
+    songs.map((s,i) => `<div class="pl-item">
+      <span class="pl-num">${i+1}</span>
+      <div><div class="pl-song">🎵 ${s.song}</div>
+      <div class="pl-who">od ${s.name}${s.reason ? ' · ' + s.reason : ''}</div></div>
+    </div>`).join('');
+}
+
+// ── VZKAZY ──
+const vzkazy = [
+  { name: 'Rodina Kaasovic', text: 'Přejeme vám celý život plný lásky, smíchu a krásných společných chvil. 🤍' },
+];
+function submitVzkaz(e) {
+  e.preventDefault();
+  const name = document.getElementById('vz-name').value;
+  const msg = document.getElementById('vz-msg').value;
+  vzkazy.unshift({ name, text: msg });
+  renderVzkazy();
+  e.target.reset();
+}
+function renderVzkazy() {
+  document.getElementById('vzkazy-wall').innerHTML = vzkazy.map(v => `
+    <div class="vzkaz-card">
+      <div class="vz-author">💌 ${v.name}</div>
+      <div class="vz-text">${v.text}</div>
+    </div>`).join('');
+}
+renderVzkazy();
+
+// ── POČASÍ ──
+async function fetchWeather() {
+  const weddingDate = new Date('2026-08-22');
+  const today = new Date();
+  const daysUntil = Math.floor((weddingDate - today) / 86400000);
+  if (daysUntil > 14) {
+    // Too far – show placeholder
+    document.getElementById('weather-icon').textContent = '☀️';
+    document.getElementById('weather-temp').textContent = '?°C';
+    document.getElementById('weather-desc').textContent = 'Předpověď zatím není k dispozici';
+    document.getElementById('weather-note').innerHTML = 
+      'Předpověď počasí pro <strong>Čížkov, 22. 8. 2026</strong> bude k dispozici přibližně 7–14 dní před svatbou. Prozatím věříme, že nás čeká krásný srpnový den! ☀️';
+    return;
+  }
+  try {
+    const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=49.563&longitude=13.679&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=Europe/Prague&start_date=2026-08-22&end_date=2026-08-22');
+    const data = await res.json();
+    const code = data.daily.weathercode[0];
+    const max = Math.round(data.daily.temperature_2m_max[0]);
+    const min = Math.round(data.daily.temperature_2m_min[0]);
+    const icons = {0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',48:'🌫️',51:'🌦️',53:'🌦️',55:'🌧️',61:'🌧️',63:'🌧️',65:'🌧️',80:'🌦️',81:'🌦️',82:'⛈️',95:'⛈️'};
+    const descs = {0:'Jasno',1:'Převážně jasno',2:'Polojasno',3:'Zataženo',45:'Mlha',51:'Lehké mrholení',61:'Déšť',80:'Přeháňky',95:'Bouřky'};
+    document.getElementById('weather-icon').textContent = icons[code] || '🌤️';
+    document.getElementById('weather-temp').textContent = `${max}°C / ${min}°C`;
+    document.getElementById('weather-desc').textContent = descs[code] || 'Proměnlivě';
+    document.getElementById('weather-note').innerHTML = `Předpověď pro <strong>Čížkov, 22. 8. 2026</strong> · Zdroj: Open-Meteo`;
+  } catch(err) {
+    document.getElementById('weather-note').textContent = 'Předpověď se nepodařilo načíst. Zkuste to znovu později.';
+  }
+}
+fetchWeather();
+
+
+// Scroll animation
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.style.opacity = '1';
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.timeline-item, .info-card, .vzkaz-card').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transition = 'opacity 0.6s ease';
+  observer.observe(el);
+});
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+  new QRCode(document.getElementById("qr-container"), {
+    text: "https://drive.google.com/drive/u/1/folders/104sSZ4hnAJevn4nxrLBsYQVQ6DOlT0VA",
+    width: 160,
+    height: 160,
+    colorDark: "#2c4f7a",
+    colorLight: "#fdf9ee",
+    correctLevel: QRCode.CorrectLevel.M
+  });
+</script>
+</body>
+</html>
