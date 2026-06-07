@@ -629,7 +629,6 @@
   <a href="#fotky">Fotky</a>
   <a href="#playlist">Playlist</a>
   <a href="#pocasi">Počasí</a>
-  <a href="#vzkazy">Vzkazy</a>
   <a href="#piti">Pití</a>
   <a href="#checklist">Tipy</a>
 </nav>
@@ -1045,25 +1044,6 @@
   </div>
 </section>
 
-<!-- VZKAZY -->
-<section id="vzkazy" style="background:linear-gradient(135deg,var(--blue-dark) 0%,#1e3a5f 100%);max-width:100%;padding:5rem 2rem;">
-  <div style="max-width:700px;margin:0 auto;text-align:center;">
-    <span class="section-label" style="color:var(--yellow);">Řekněte nám to</span>
-    <div class="section-title" style="color:var(--yellow-light);">Vzkazy novomanželům</div>
-    <div class="divider"><div class="divider-line" style="background:rgba(122,174,212,0.4);"></div><div class="divider-heart" style="color:var(--yellow);">♡</div><div class="divider-line" style="background:rgba(122,174,212,0.4);"></div></div>
-    <p style="font-size:0.88rem;color:var(--blue-light);line-height:1.7;margin-bottom:2rem;">
-      Přejte Lucii a Václavovi. Váš vzkaz se objeví na zdi přání. 💌
-    </p>
-    <form class="rsvp-form" style="max-width:480px;margin:0 auto 2rem;" onsubmit="submitVzkaz(event)">
-      <input type="text" id="vz-name" placeholder="Vaše jméno *" required style="background:rgba(255,255,255,0.1);border-color:rgba(122,174,212,0.4);color:white;">
-      <textarea id="vz-msg" placeholder="Váš vzkaz novomanželům 💌 *" required rows="3" style="background:rgba(255,255,255,0.1);border-color:rgba(122,174,212,0.4);color:white;"></textarea>
-      <button type="submit" class="btn-primary" style="background:var(--yellow-mid);color:var(--blue-dark);">Odeslat vzkaz</button>
-    </form>
-    <div id="vzkazy-wall" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;text-align:left;"></div>
-  </div>
-</section>
-
-
 <!-- POČASÍ -->
 <section id="pocasi" style="text-align:center;">
   <span class="section-label">Příroda nám přeje</span>
@@ -1093,7 +1073,7 @@
   <div style="max-width:680px;margin:0 auto;">
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;text-align:left;max-width:680px;margin:0 auto;">
       <div class="info-card"><div class="info-icon-svg"><svg viewBox="0 0 40 40" fill="none"><path d="M5 28c0 0 4-2 8-2l8-10 6 2 5-2 3 4-2 2s-2 6-8 6H5Z" stroke="#7aaed4" stroke-width="1.5" stroke-linejoin="round"/><path d="M13 26l2-10" stroke="#c8dff5" stroke-width="1.2" stroke-linecap="round"/><path d="M19 28l-1-4 6-2" stroke="#c8dff5" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Pohodlné boty</h3><p>Část programu bude probíhat venku na trávě. Jehlové podpatky možná nechte doma. 😄</p></div>
-      <div class="info-card"><div class="info-icon-svg"><svg viewBox="0 0 40 40" fill="none"><rect x="12" y="5" width="16" height="30" rx="3" stroke="#7aaed4" stroke-width="1.5"/><circle cx="20" cy="31" r="1.5" fill="#3a6fa8"/><path d="M16 9h8" stroke="#c8dff5" stroke-width="1.3" stroke-linecap="round"/></svg></div><h3>Nabitý telefon</h3><p>Určitě budete chtít fotit a rovnou házet fotky přes QR kód do společného alba. Doporučujeme dorazit se 100 % baterky – powerbank v kapse je jasný bonus.</p></div>
+      <div class="info-card"><div class="info-icon-svg"><svg viewBox="0 0 40 40" fill="none"><rect x="12" y="5" width="16" height="30" rx="3" stroke="#7aaed4" stroke-width="1.5"/><circle cx="20" cy="31" r="1.5" fill="#3a6fa8"/><path d="M16 9h8" stroke="#c8dff5" stroke-width="1.3" stroke-linecap="round"/></svg></div><h3>Nabitý telefon</h3><p>Určitě budete chtít fotit a rovnou házet fotky přes QR kód do společného alba. Doporučujeme dorazit se 100 % baterky – powerbanka v kapse je jasný bonus.</p></div>
       <div class="info-card"><div class="info-icon-svg"><svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="9" r="3" stroke="#7aaed4" stroke-width="1.5"/><path d="M20 12v10" stroke="#3a6fa8" stroke-width="1.5" stroke-linecap="round"/><path d="M20 16l-6 5" stroke="#7aaed4" stroke-width="1.5" stroke-linecap="round"/><path d="M20 16l6 5" stroke="#7aaed4" stroke-width="1.5" stroke-linecap="round"/><path d="M20 22l-4 9" stroke="#3a6fa8" stroke-width="1.5" stroke-linecap="round"/><path d="M20 22l4 9" stroke="#3a6fa8" stroke-width="1.5" stroke-linecap="round"/></svg></div><h3>Taneční nálada</h3><p>DJ bude hrát do noci. Přijďte s chutí se bavit – to je to nejdůležitější.</p></div>
     </div>
   </div>
@@ -1222,16 +1202,7 @@ function renderPlaylist() {
     </div>`).join('');
 }
 
-// ── VZKAZY ──
-const vzkazy = [
-  { name: 'Rodina Kaasovic', text: 'Přejeme vám celý život plný lásky, smíchu a krásných společných chvil. 🤍' },
-];
-function submitVzkaz(e) {
-  e.preventDefault();
-  const name = document.getElementById('vz-name').value;
-  const msg = document.getElementById('vz-msg').value;
-  vzkazy.unshift({ name, text: msg });
-  renderVzkazy();
+
   e.target.reset();
 }
 function renderVzkazy() {
