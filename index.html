@@ -1098,84 +1098,46 @@
 </footer>
 
 <script>
-// Countdown
+// ── COUNTDOWN ──
 function updateCountdown() {
   const wedding = new Date('2026-08-22T12:00:00');
   const now = new Date();
   const diff = wedding - now;
   if (diff <= 0) {
-    document.getElementById('cd-days').textContent = '0';
-    document.getElementById('cd-hours').textContent = '0';
-    document.getElementById('cd-mins').textContent = '0';
-    document.getElementById('cd-secs').textContent = '0';
+    ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id => document.getElementById(id).textContent = '0');
     return;
   }
-  const days = Math.floor(diff / 86400000);
-  const hours = Math.floor((diff % 86400000) / 3600000);
-  const mins = Math.floor((diff % 3600000) / 60000);
-  const secs = Math.floor((diff % 60000) / 1000);
-  document.getElementById('cd-days').textContent = days;
-  document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
-  document.getElementById('cd-mins').textContent = String(mins).padStart(2,'0');
-  document.getElementById('cd-secs').textContent = String(secs).padStart(2,'0');
+  document.getElementById('cd-days').textContent = Math.floor(diff / 86400000);
+  document.getElementById('cd-hours').textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2,'0');
+  document.getElementById('cd-mins').textContent = String(Math.floor((diff % 3600000) / 60000)).padStart(2,'0');
+  document.getElementById('cd-secs').textContent = String(Math.floor((diff % 60000) / 1000)).padStart(2,'0');
 }
-updateCountdown();
-setInterval(updateCountdown, 1000);
+document.addEventListener('DOMContentLoaded', function() {
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+});
 
-// RSVP
+// ── RSVP ──
 function submitRSVP(e) {
   e.preventDefault();
   document.getElementById('rsvpForm').style.display = 'none';
   document.getElementById('rsvpSuccess').style.display = 'block';
 }
 
-
-
-
-// ── ANKETA PITÍ ──
-const pitiVotes = {};
-function submitPiti(e) {
-  e.preventDefault();
-  const checked = [...document.querySelectorAll('input[name="drink"]:checked')].map(i => i.value);
-  const jine = document.getElementById('piti-jine').value;
-  if (jine) checked.push(jine);
-  checked.forEach(d => { pitiVotes[d] = (pitiVotes[d] || 0) + 1; });
-  document.getElementById('pitiForm').style.display = 'none';
-  document.getElementById('piti-success').style.display = 'block';
-  renderPitiResults();
-}
-function renderPitiResults() {
-  const vysledky = document.getElementById('piti-vysledky');
-  const bars = document.getElementById('piti-bars');
-  if (Object.keys(pitiVotes).length === 0) return;
-  vysledky.style.display = 'block';
-  const max = Math.max(...Object.values(pitiVotes));
-  bars.innerHTML = Object.entries(pitiVotes)
-    .sort((a,b) => b[1]-a[1])
-    .map(([name, count]) => `
-      <div style="margin-bottom:0.7rem;">
-        <div style="display:flex;justify-content:space-between;font-size:0.8rem;color:var(--blue-light);margin-bottom:0.3rem;">
-          <span>${name}</span><span>${count}×</span>
-        </div>
-        <div style="background:rgba(255,255,255,0.1);border-radius:2px;height:6px;">
-          <div style="background:var(--yellow-mid);height:6px;border-radius:2px;width:${Math.round(count/max*100)}%;transition:width 0.5s ease;"></div>
-        </div>
-      </div>`).join('');
-}
-
 // ── UBYTOVÁNÍ ──
 function submitUbytovani(e) {
   e.preventDefault();
-  const name = document.getElementById('ub-name').value;
-  const persons = document.getElementById('ub-persons').value;
-  const snidane = document.getElementById('ub-snidane').value;
-  const contact = document.getElementById('ub-contact').value;
-  const note = document.getElementById('ub-note').value;
-  const total = parseInt(persons) * 650 + (snidane === 'ano' ? parseInt(persons) * 150 : 0);
-  document.getElementById('ubytovaniForm').style.display = 'none';
+  const name = document.getElementById('ub-name') ? document.getElementById('ub-name').value : '';
+  const persons = document.getElementById('ub-persons') ? document.getElementById('ub-persons').value : '1';
+  const contact = document.getElementById('ub-contact') ? document.getElementById('ub-contact').value : '';
+  const total = parseInt(persons) * 800;
+  const form = document.getElementById('ubytovaniForm');
   const success = document.getElementById('ubytovani-success');
-  success.style.display = 'block';
-  success.innerHTML = `Díky, <em>${name}</em>! Zarezervováno pro ${persons} ${parseInt(persons) === 1 ? 'osobu' : 'osoby'}${snidane === 'ano' ? ' se snídaní' : ''}. Celkem: <strong>${total} Kč</strong>. Svědkyně Baru vás brzy kontaktuje na ${contact}. 🤍`;
+  if (form) form.style.display = 'none';
+  if (success) {
+    success.style.display = 'block';
+    success.innerHTML = 'Díky, <em>' + name + '</em>! Zarezervováno pro ' + persons + ' ' + (parseInt(persons) === 1 ? 'osobu' : 'osoby') + '. Svědkyně Baru vás brzy kontaktuje na ' + contact + '. 🤍';
+  }
 }
 
 // ── PLAYLIST ──
@@ -1188,72 +1150,61 @@ function submitPlaylist(e) {
   songs.push({ name, song, reason });
   renderPlaylist();
   e.target.reset();
-  document.getElementById('playlist-success').style.display = 'block';
-  setTimeout(() => document.getElementById('playlist-success').style.display = 'none', 3000);
+  const succ = document.getElementById('playlist-success');
+  if (succ) {
+    succ.style.display = 'block';
+    setTimeout(() => succ.style.display = 'none', 3000);
+  }
 }
 function renderPlaylist() {
   const list = document.getElementById('playlist-list');
+  if (!list) return;
   if (songs.length === 0) { list.innerHTML = ''; return; }
   list.innerHTML = '<p style="font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--blue);margin-bottom:1rem;">Navržené písně</p>' +
-    songs.map((s,i) => `<div class="pl-item">
-      <span class="pl-num">${i+1}</span>
-      <div><div class="pl-song">🎵 ${s.song}</div>
-      <div class="pl-who">od ${s.name}${s.reason ? ' · ' + s.reason : ''}</div></div>
-    </div>`).join('');
+    songs.map((s,i) => '<div class="pl-item"><span class="pl-num">' + (i+1) + '</span><div><div class="pl-song">' + s.song + '</div><div class="pl-who">od ' + s.name + (s.reason ? ' · ' + s.reason : '') + '</div></div></div>').join('');
 }
-
-
-  e.target.reset();
-}
-function renderVzkazy() {
-  document.getElementById('vzkazy-wall').innerHTML = vzkazy.map(v => `
-    <div class="vzkaz-card">
-      <div class="vz-author">💌 ${v.name}</div>
-      <div class="vz-text">${v.text}</div>
-    </div>`).join('');
-}
-renderVzkazy();
 
 // ── POČASÍ ──
 async function fetchWeather() {
   const weddingDate = new Date('2026-08-22');
   const today = new Date();
   const daysUntil = Math.floor((weddingDate - today) / 86400000);
+  const icon = document.getElementById('weather-icon');
+  const temp = document.getElementById('weather-temp');
+  const desc = document.getElementById('weather-desc');
+  const note = document.getElementById('weather-note');
   if (daysUntil > 14) {
-    // Too far – show placeholder
-    document.getElementById('weather-icon').textContent = '☀️';
-    document.getElementById('weather-temp').textContent = '?°C';
-    document.getElementById('weather-desc').textContent = 'Předpověď zatím není k dispozici';
-    document.getElementById('weather-note').innerHTML = 
-      'Předpověď počasí pro <strong>Čížkov, 22. 8. 2026</strong> bude k dispozici přibližně 7–14 dní před svatbou. Prozatím věříme, že nás čeká krásný srpnový den! ☀️';
+    if (icon) icon.textContent = '☀️';
+    if (temp) temp.textContent = '?°C';
+    if (desc) desc.textContent = 'Předpověď zatím není k dispozici';
+    if (note) note.innerHTML = 'Předpověď počasí pro <strong>Čížkov, 22. 8. 2026</strong> bude k dispozici přibližně 7–14 dní před svatbou. Prozatím věříme, že nás čeká krásný srpnový den!';
     return;
   }
   try {
     const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=49.563&longitude=13.679&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=Europe/Prague&start_date=2026-08-22&end_date=2026-08-22');
     const data = await res.json();
     const code = data.daily.weathercode[0];
-    const max = Math.round(data.daily.temperature_2m_max[0]);
-    const min = Math.round(data.daily.temperature_2m_min[0]);
-    const icons = {0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',48:'🌫️',51:'🌦️',53:'🌦️',55:'🌧️',61:'🌧️',63:'🌧️',65:'🌧️',80:'🌦️',81:'🌦️',82:'⛈️',95:'⛈️'};
-    const descs = {0:'Jasno',1:'Převážně jasno',2:'Polojasno',3:'Zataženo',45:'Mlha',51:'Lehké mrholení',61:'Déšť',80:'Přeháňky',95:'Bouřky'};
-    document.getElementById('weather-icon').textContent = icons[code] || '🌤️';
-    document.getElementById('weather-temp').textContent = `${max}°C / ${min}°C`;
-    document.getElementById('weather-desc').textContent = descs[code] || 'Proměnlivě';
-    document.getElementById('weather-note').innerHTML = `Předpověď pro <strong>Čížkov, 22. 8. 2026</strong> · Zdroj: Open-Meteo`;
+    const maxT = Math.round(data.daily.temperature_2m_max[0]);
+    const minT = Math.round(data.daily.temperature_2m_min[0]);
+    const icons = {0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',61:'🌧️',80:'🌦️',95:'⛈️'};
+    const descs = {0:'Jasno',1:'Převážně jasno',2:'Polojasno',3:'Zataženo',45:'Mlha',61:'Déšť',80:'Přeháňky',95:'Bouřky'};
+    if (icon) icon.textContent = icons[code] || '🌤️';
+    if (temp) temp.textContent = maxT + '°C / ' + minT + '°C';
+    if (desc) desc.textContent = descs[code] || 'Proměnlivě';
+    if (note) note.innerHTML = 'Předpověď pro <strong>Čížkov, 22. 8. 2026</strong> · Zdroj: Open-Meteo';
   } catch(err) {
-    document.getElementById('weather-note').textContent = 'Předpověď se nepodařilo načíst. Zkuste to znovu později.';
+    if (note) note.textContent = 'Předpověď se nepodařilo načíst. Zkuste to znovu později.';
   }
 }
 fetchWeather();
 
-
-// Scroll animation
+// ── SCROLL ANIMATION ──
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) e.target.style.opacity = '1';
   });
 }, { threshold: 0.1 });
-document.querySelectorAll('.timeline-item, .info-card, .vzkaz-card').forEach(el => {
+document.querySelectorAll('.timeline-item, .info-card').forEach(el => {
   el.style.opacity = '0';
   el.style.transition = 'opacity 0.6s ease';
   observer.observe(el);
